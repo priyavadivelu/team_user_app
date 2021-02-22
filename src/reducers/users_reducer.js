@@ -1,8 +1,8 @@
-import { FETCH_TEAM_USERS } from "../actions/index";
+import { FETCH_TEAM_USERS } from "../actions/indexUsers";
 
 const INITIAL_STATE = { users: [] };
 
-export default function (state = INITIAL_STATE, action) {
+export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_TEAM_USERS:
       return { ...state, users: action.payload.data };
@@ -10,4 +10,4 @@ export default function (state = INITIAL_STATE, action) {
     default:
       return state;
   }
-}
+};

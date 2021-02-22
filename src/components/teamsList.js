@@ -20,7 +20,6 @@ class TeamsList extends Component {
   }
 
   render() {
-    console.log(this.props.teams);
     return (
       <Grid container direction="column" alignItems="center" justify="center">
         {this.state.isDataLoading ? (
@@ -32,7 +31,7 @@ class TeamsList extends Component {
             <ul>
               <h3>TEAMS</h3>
               {this.props.teams.map((team) => (
-                <li id="teams-list">
+                <li key={team.id} id="teams-list">
                   <Link
                     to={{
                       pathname: `/teams/${team.id}`,
@@ -57,4 +56,11 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchTeams })(TeamsList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // dispatching actions returned by action creators
+    fetchTeams: () => dispatch(fetchTeams()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TeamsList);
