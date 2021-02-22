@@ -1,22 +1,17 @@
-import { React, useState } from "react";
+import { React } from "react";
 
-const AppFilter = ({ data, setFilteredData }) => {
-  const getValueInput = (event) => {
-    const filteredTeams = this.props.teams.filter((filterTeam) => {
-      return (
-        data.name.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1
-      );
-    });
-  };
+const AppFilter = () => {
   return (
-    <div>
-      <input
-        type="text"
-        id="filter"
-        className="form-control"
-        placeholder="Search here..."
-        onChange={getValueInput}
-      />
+    <div className="row filter">
+      <div className="col-sm-4">
+        <input
+          type="text"
+          id="filter"
+          className="form-control"
+          placeholder="Search here..."
+          onChange={this.onchange}
+        />
+      </div>
     </div>
   );
 };

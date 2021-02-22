@@ -72,8 +72,7 @@ class UsersList extends Component {
               <div className="col-sm-4">
                 <input
                   type="text"
-                  id="filter"
-                  className="form-control"
+                  className="filter"
                   placeholder="Search here..."
                   onChange={this.onchange}
                 />
