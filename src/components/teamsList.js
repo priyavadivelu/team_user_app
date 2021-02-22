@@ -4,13 +4,13 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { Link } from "react-router-dom";
 import fetchTeams from "../actions/index";
 import "../styles.css";
-import AppFilter from "../components/common/appFilter";
 
 class TeamsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isDataLoading: true,
+      search: "",
     };
   }
 
@@ -19,8 +19,15 @@ class TeamsList extends Component {
     this.setState({ isDataLoading: false });
   }
 
+  onchange = (e) => {
+    this.setState({ search: e.target.value });
+  };
+
   render() {
-    console.log(this.props.teams);
+    const { search } = this.state;
+    const filteredTeams = this.props.teams.filter((filterTeam) => {
+      return filterTeam.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+    });
     return (
       <Fragment>
         <div className="row header">
@@ -29,17 +36,24 @@ class TeamsList extends Component {
 
         <div className="row filter">
           <div className="col-sm-4">
-            <AppFilter data={this.props.teams} />
+            <input
+              type="text"
+              id="filter"
+              className="form-control"
+              placeholder="Search here..."
+              onChange={this.onchange}
+            />
           </div>
         </div>
+
         {this.state.isDataLoading ? (
           <div className="row">
             <CircularProgress />
           </div>
         ) : (
           <div className="row">
-            {this.props.teams.length > 0 &&
-              this.props.teams.map((team) => {
+            {filteredTeams.length > 0 &&
+              filteredTeams.map((team) => {
                 if (team) {
                   return (
                     <div className="col-md-3 col-sm-6" key={team.id}>

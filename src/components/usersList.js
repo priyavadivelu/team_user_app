@@ -10,6 +10,7 @@ class UsersList extends Component {
     super(props);
     this.state = {
       isDataLoading: true,
+      search: "",
     };
   }
 
@@ -18,10 +19,19 @@ class UsersList extends Component {
     this.setState({ isDataLoading: false });
   }
 
+  onchange = (e) => {
+    this.setState({ search: e.target.value });
+  };
+
   render() {
+    const { search } = this.state;
+    const filteredUsers = this.props.users.filter((filterUser) => {
+      return filterUser.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+    });
+
     const displayUsersOfaTeam = () => {
-      if (this.props.users.length > 0) {
-        const filteredData = this.props.users.filter(
+      if (filteredUsers.length > 0) {
+        const filteredData = filteredUsers.filter(
           (user) => user.teamId[0] === this.props.location.state.data.id
         );
         return (
@@ -58,6 +68,17 @@ class UsersList extends Component {
             alignItems="flex-start"
             justify="flex-start"
           >
+            <div className="row filter">
+              <div className="col-sm-4">
+                <input
+                  type="text"
+                  id="filter"
+                  className="form-control"
+                  placeholder="Search here..."
+                  onChange={this.onchange}
+                />
+              </div>
+            </div>
             {displayUsersOfaTeam()}
           </Grid>
         )}

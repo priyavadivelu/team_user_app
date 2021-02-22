@@ -2,11 +2,11 @@ import { React, useState } from "react";
 
 const AppFilter = ({ data, setFilteredData }) => {
   const getValueInput = (event) => {
-    const filter = data.filter((rec) =>
-      rec.name.toLowerCase().includes(event.target.value.toLowerCase())
-    );
-    // setFilteredData(filter);
-    return filter;
+    const filteredTeams = this.props.teams.filter((filterTeam) => {
+      return (
+        data.name.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1
+      );
+    });
   };
   return (
     <div>
