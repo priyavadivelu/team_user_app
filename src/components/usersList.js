@@ -19,7 +19,13 @@ class UsersList extends Component {
   }
 
   render() {
+    const displayUsersOfaTeam = () => {
+      if (this.props.location.substring(6) === this.props.users.teamId[0]) {
+        return console.log("users");
+      }
+    };
     console.log("dat here", this.props.location);
+    console.log(this.props.users);
     return (
       <Grid container direction="column" alignItems="center" justify="center">
         {this.state.isDataLoading ? (
@@ -28,14 +34,16 @@ class UsersList extends Component {
           </Grid>
         ) : (
           <div>
-            <ul>
-              <h3>USERS</h3>
-              {/* {this.props.users.map((user) => (
-                <li key={user.id} id="teams-list">
-                  {user.name}
-                </li>
-              ))} */}
-            </ul>
+            {this.props.users !== 0 && (
+              <ul>
+                <h3>USERS</h3>
+                {this.props.users.map((user) => (
+                  <li key={user.id} id="teams-list">
+                    {user.name}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         )}
       </Grid>
@@ -44,9 +52,11 @@ class UsersList extends Component {
 }
 
 function mapStateToProps(state) {
-  return {
-    users: state.users.users,
-  };
+  if (state.users.users !== 0) {
+    return {
+      users: state.users.users,
+    };
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
