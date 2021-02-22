@@ -1,4 +1,47 @@
-#teams-list {
-  list-style-type: square;
-  padding: 10px 0;
+.App {
+  padding: 20px;
+  background-color: ghostwhite;
+  height: 100%;
+  width: 100%;
+}
+
+.header {
+  padding-left: 15px;
+  padding-bottom: 30px;
+}
+
+.filter {
+  padding-bottom: 30px;
+}
+
+.app-card {
+  background-color: #a4508b;
+  background-image: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-card:hover {
+  background-color: #89d4cf;
+  background-image: linear-gradient(315deg, #89d4cf 0%, #6e45e1 74%);
+}
+
+a {
+  color: #fff !important;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  height: 30px;
+  margin: 10px;
+  padding-left: 20px;
+  list-style: none;
+  box-shadow: 3px 0px 0px green inset;
+  background-color: rgb(238, 247, 238);
 }

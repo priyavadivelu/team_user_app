@@ -20,24 +20,16 @@ class UsersList extends Component {
 
   render() {
     const displayUsersOfaTeam = () => {
-      if (this.props.location.substring(6) === this.props.users.teamId[0]) {
-        return console.log("users");
-      }
-    };
-    console.log("dat here", this.props.location);
-    console.log(this.props.users);
-    return (
-      <Grid container direction="column" alignItems="center" justify="center">
-        {this.state.isDataLoading ? (
-          <Grid item>
-            <CircularProgress />
-          </Grid>
-        ) : (
+      if (this.props.users.length > 0) {
+        const filteredData = this.props.users.filter(
+          (user) => user.teamId[0] === this.props.location.state.data.id
+        );
+        return (
           <div>
-            {this.props.users !== 0 && (
+            <h3 id="team-name">{this.props.location.state.data.name}</h3>
+            {filteredData.length !== 0 && (
               <ul>
-                <h3>USERS</h3>
-                {this.props.users.map((user) => (
+                {filteredData.map((user) => (
                   <li key={user.id} id="teams-list">
                     {user.name}
                   </li>
@@ -45,6 +37,29 @@ class UsersList extends Component {
               </ul>
             )}
           </div>
+        );
+      }
+    };
+    return (
+      <Grid
+        container
+        direction="column"
+        alignItems="flex-start"
+        justify="flex-start"
+      >
+        {this.state.isDataLoading ? (
+          <Grid item>
+            <CircularProgress />
+          </Grid>
+        ) : (
+          <Grid
+            container
+            direction="column"
+            alignItems="flex-start"
+            justify="flex-start"
+          >
+            {displayUsersOfaTeam()}
+          </Grid>
         )}
       </Grid>
     );
